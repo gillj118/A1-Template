@@ -33,18 +33,32 @@ public class Main {
 
             logger.info("**** Reading the maze from file " + mazeFile);
 
-            BufferedReader reader = new BufferedReader(new FileReader(mazeFile));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                for (int idx = 0; idx < line.length(); idx++) {
-                    if (line.charAt(idx) == '#') {
-                        System.out.print("#");
-                    } else if (line.charAt(idx) == ' ') {
-                        System.out.print(" ");
-                    }
-                }
-                System.out.print(System.lineSeparator());
-            }
+
+
+            MazeReader mazeRead = new MazeReader(mazeFile);
+
+            Maze maze = mazeRead.readMaze();
+
+            maze.printMaze();
+
+
+
+         //   BufferedReader reader = new BufferedReader(new FileReader(mazeFile));
+            
+         //   MazeReader maze = new MazeReader(mazefile);
+
+
+            // String line;
+            // while ((line = reader.readLine()) != null) {
+            //     for (int idx = 0; idx < line.length(); idx++) {
+            //         if (line.charAt(idx) == '#') {
+            //             System.out.print("#");
+            //         } else if (line.charAt(idx) == ' ') {
+            //             System.out.print(" ");
+            //         }
+            //     }
+            //     System.out.print(System.lineSeparator());
+            // }
         } catch(Exception e) {
             logger.error("/!\\ An error has occured /!\\");
         }
