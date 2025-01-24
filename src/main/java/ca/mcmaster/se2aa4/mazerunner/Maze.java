@@ -32,6 +32,21 @@ public class Maze{
 		}
 	}
 
+	public int getRows()
+	{
+		return this.rows;
+	}
+
+	public int getCols()
+	{
+		return this.cols;
+	}
+
+	public char[][] getMaze()
+	{
+		return this.maze;
+	}
+
 	public void entry(String entry)
 	{
 		return;
