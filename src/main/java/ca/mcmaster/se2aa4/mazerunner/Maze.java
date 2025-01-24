@@ -25,19 +25,8 @@ public class Maze{
 		for (int i = 0; i<rows ; i++)
 		{
 			for (int j = 0; j<cols;j++)
-			{
-				
+			{		
 				System.out.print(maze[i][j]);
-				// if (maze[i][j] == ' ')
-				// {
-				// 	System.out.print(" ");
-				// }
-
-				// else if (maze[i][j] == '#')
-				// {
-				// 	System.out.print("#");
-				// }
-
 			}
 			System.out.println();
 		}
