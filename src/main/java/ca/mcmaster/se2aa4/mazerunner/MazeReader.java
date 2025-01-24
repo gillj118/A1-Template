@@ -19,13 +19,11 @@ public class MazeReader {
 
     public Maze readMaze() throws IOException
     {
-        
         String [] info = getSize();
         int rows = Integer.parseInt(info[0]);
         int cols = Integer.parseInt(info[1]);
         String linearMaze = info[2];
         char [][] maze =  new char [rows][cols];
-
 
         for (int i = 0; i<rows; i ++)
         {
@@ -33,9 +31,8 @@ public class MazeReader {
             {
                 maze [i][j] = linearMaze.charAt((i*cols)+j);
             }
+            
         }
-    
-
         return new Maze(rows,cols,maze);
     }
 
@@ -45,21 +42,32 @@ public class MazeReader {
         int cols = 0;
         int rows=0;
         String linearMaze= "";
+        //StringBuilder stringBuilder = new StringBuilder(); 
         try(BufferedReader reader = new BufferedReader(new FileReader(mazeFile)))
         {
             String line;
             while ((line = reader.readLine()) != null) 
             {
-                cols = line.length();
-                linearMaze += line;
                 rows++;
+
+                if (line.length() == 0)
+                {
+                    for(int i = 0; i<cols; i++)
+                    {
+                        linearMaze += " ";
+                    }
+                }
+
+                else
+                {
+                    cols = line.length();
+                    linearMaze += line;
+                }
             }
         
         }
-        
+        System.out.println("Linear Maze Length: " + linearMaze.length());
         String [] info = {Integer.toString(rows),Integer.toString(cols),linearMaze};
-
         return info;
-
     }
 }

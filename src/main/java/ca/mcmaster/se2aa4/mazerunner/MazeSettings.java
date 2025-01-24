@@ -13,18 +13,19 @@ public class MazeSettings {
 
         for (int i = 0; i<rows ; i++)
         {
-            if (maze[rows][0] == ' ')
+            if (maze[i][0] == ' ')
             {
                 westOpeningX = 0; 
-                westOpeningY = rows;
+                westOpeningY = i;
             }
 
-            if (maze[rows][cols-1] == ' ')
+            if (maze[i][cols-1] == ' ')
             {
                 eastOpeningX = cols-1;
-                eastOpenngY = rows;
+                eastOpenngY = i;
             }
         }
+
         int [] coords = {westOpeningX,westOpeningY,eastOpeningX,eastOpenngY};
         return coords;
     }   
@@ -44,6 +45,8 @@ public class MazeSettings {
         {
             start = 'E';
         }
+        System.out.println("Starside: " + start);
+
         return start;
     }
 }
