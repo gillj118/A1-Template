@@ -39,56 +39,58 @@ public class Main {
             maze.printMaze();
 
              MazeSettings settings = new MazeSettings();
-             int [] openingCoords = settings.findOpeneings(maze.getRows(),maze.getCols(),maze.getMaze());
+             
+             int [] entranceExitCoords = settings.findStartEnd(maze.getRows(),maze.getCols(),maze.getMaze());
 
-             int  [] startCoords = new int[2];
-             int  [] finishCoords = new int [2];
-             char sideStart = settings.findStart();
-             char facingDirection;
-
-             MazeWalk mazeWalk;
-            if (sideStart == 'E')
-            {
-                startCoords[0] =  openingCoords[2];
-                startCoords[1] = openingCoords[3];
-
-                finishCoords[0] = openingCoords[0];
-                finishCoords[1] = openingCoords[1];
-
-                facingDirection = 'W'; 
-                System.out.println(facingDirection);
-
-                mazeWalk = new MazeWalk(startCoords[0],startCoords[1], facingDirection);
-            }
-
-            else
-            {
-                startCoords[0] =  openingCoords[0];
-                startCoords[1] = openingCoords[1];
-
-                finishCoords[0] = openingCoords[2];
-                finishCoords[1] = openingCoords[3];
-
-                facingDirection = 'E';
-
-                mazeWalk = new MazeWalk(startCoords[0],startCoords[1],facingDirection);
-            }
+             System.out.println("Starting coords: (x,y) " + entranceExitCoords[0] + " " + entranceExitCoords[1]);
+             System.out.println("ENding coords: (x,y) " + entranceExitCoords[2] + " " + entranceExitCoords[3]);
+            // char facingDirection;
 
 
 
-            RightHandAlgorithm solver = new RightHandAlgorithm();
-            if (solver.pathSearch(maze,mazeWalk, finishCoords[0],finishCoords[1], mazeFile) == true)
-            {
-                logger.info("**** Computing path");
-                logger.info("PATH COMPUTED");
-                maze.printMaze();
-                logger.info("** End of MazeRunner");
-              }
+          //s   MazeWalk mazeWalk = new MazeWalk
+            // if (sideStart == 'E')
+            // {
+            //     startCoords[0] =  openingCoords[2];
+            //     startCoords[1] = openingCoords[3];
 
-            else
-            {
-                System.out.println("Maze solver has failed");
-            }
+            //     finishCoords[0] = openingCoords[0];
+            //     finishCoords[1] = openingCoords[1];
+
+            //     facingDirection = 'W'; 
+            //     System.out.println(facingDirection);
+
+            //     mazeWalk = new MazeWalk(startCoords[0],startCoords[1], facingDirection);
+            // }
+
+            // else
+            // {
+            //     startCoords[0] =  openingCoords[0];
+            //     startCoords[1] = openingCoords[1];
+
+            //     finishCoords[0] = openingCoords[2];
+            //     finishCoords[1] = openingCoords[3];
+
+            //     facingDirection = 'E';
+
+            //     mazeWalk = new MazeWalk(startCoords[0],startCoords[1],facingDirection);
+            // }
+
+
+
+            // RightHandAlgorithm solver = new RightHandAlgorithm();
+            // if (solver.pathSearch(maze,mazeWalk, finishCoords[0],finishCoords[1], mazeFile) == true)
+            // {
+            //     logger.info("**** Computing path");
+            //     logger.info("PATH COMPUTED");
+            //     maze.printMaze();
+            //     logger.info("** End of MazeRunner");
+            //   }
+
+            // else
+            // {
+            //     System.out.println("Maze solver has failed");
+            // }
 
             
 

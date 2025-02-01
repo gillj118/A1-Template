@@ -31,7 +31,7 @@ public class Maze{
 			System.out.println();
 		}
 
-		System.out.println("\n\n\n");
+		System.out.println("\n");
 	}
 
 	public void update(int row,int col, char arrow)
