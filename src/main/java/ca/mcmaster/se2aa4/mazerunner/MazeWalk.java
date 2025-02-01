@@ -67,7 +67,7 @@ public class MazeWalk
 	{
 		if (direction == 'N')
 		{
-			this.yCoord += 1;
+			this.yCoord -= 1;
 		}
 
 		else if (direction == 'W')
@@ -77,7 +77,7 @@ public class MazeWalk
 
 		else if (direction == 'S')
 		{
-			this.yCoord -= 1;
+			this.yCoord += 1;
 		}
 
 		else
