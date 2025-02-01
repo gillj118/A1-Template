@@ -40,15 +40,19 @@ public class MazeReader {
     private String[] getSize() throws IOException
     {
         int cols = 0;
+        int tempCols = 0;
         int rows=0;
         String linearMaze= "";
-        //StringBuilder stringBuilder = new StringBuilder(); 
         try(BufferedReader reader = new BufferedReader(new FileReader(mazeFile)))
         {
             String line;
             while ((line = reader.readLine()) != null) 
             {
                 rows++;
+                if (rows == 1)
+                {
+                    cols = line.length();
+                }
 
                 if (line.length() == 0)
                 {
@@ -60,13 +64,21 @@ public class MazeReader {
 
                 else
                 {
-                    cols = line.length();
                     linearMaze += line;
+                    tempCols = line.length();
+
+                    if (cols > tempCols)
+                    {
+                        for (int i = 0; i< cols - tempCols; i++)
+                        {
+                            linearMaze += " ";
+                        }
+                    }
+
                 }
             }
         
         }
-        System.out.println("Linear Maze Length: " + linearMaze.length());
         String [] info = {Integer.toString(rows),Integer.toString(cols),linearMaze};
         return info;
     }
