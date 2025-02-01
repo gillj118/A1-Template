@@ -34,11 +34,6 @@ public class Maze{
 		System.out.println("\n");
 	}
 
-	public void update(int row,int col, char arrow)
-	{
-		this.maze [row][col] = arrow;
-	}
-
 	public int getRows()
 	{
 		return this.rows;
@@ -49,7 +44,7 @@ public class Maze{
 		return this.cols;
 	}
 
-	public char[][] getMaze()
+	public char[][] returnCopy()
 	{
 		return this.maze;
 	}

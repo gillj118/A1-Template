@@ -40,42 +40,29 @@ public class Main {
 
              MazeSettings settings = new MazeSettings();
              
-             int [] entranceExitCoords = settings.findStartEnd(maze.getRows(),maze.getCols(),maze.getMaze());
+             int [] entranceExitCoords = settings.findStartEnd(maze.getRows(),maze.getCols(),maze.returnCopy());
 
              System.out.println("Starting coords: (x,y) " + entranceExitCoords[0] + " " + entranceExitCoords[1]);
              System.out.println("ENding coords: (x,y) " + entranceExitCoords[2] + " " + entranceExitCoords[3]);
-            // char facingDirection;
+            
+             char facingDirection;
+             char sideStart;
 
+             //Westside start
+             if (entranceExitCoords[0] == 0)
+             {
+               sideStart = 'W';
+               facingDirection = 'E';
+             }
 
-
-          //s   MazeWalk mazeWalk = new MazeWalk
-            // if (sideStart == 'E')
-            // {
-            //     startCoords[0] =  openingCoords[2];
-            //     startCoords[1] = openingCoords[3];
-
-            //     finishCoords[0] = openingCoords[0];
-            //     finishCoords[1] = openingCoords[1];
-
-            //     facingDirection = 'W'; 
-            //     System.out.println(facingDirection);
-
-            //     mazeWalk = new MazeWalk(startCoords[0],startCoords[1], facingDirection);
-            // }
-
-            // else
-            // {
-            //     startCoords[0] =  openingCoords[0];
-            //     startCoords[1] = openingCoords[1];
-
-            //     finishCoords[0] = openingCoords[2];
-            //     finishCoords[1] = openingCoords[3];
-
-            //     facingDirection = 'E';
-
-            //     mazeWalk = new MazeWalk(startCoords[0],startCoords[1],facingDirection);
-            // }
-
+             //Eastside start
+             else
+             {
+                sideStart = 'E';
+                facingDirection = 'W';
+             }
+            
+            RightHandAlgorithm algorithm = new RightHandAlgorithm(maze.returnCopy(),entranceExitCoords,facingDirection);
 
 
             // RightHandAlgorithm solver = new RightHandAlgorithm();
