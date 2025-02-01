@@ -12,7 +12,7 @@ public class WallChecker{
 		this.walker = walker;
 	}
 
-	private boolean checkRightHandWall()
+	public boolean checkRightHandWall()
     {
         int xCoord = walker.getXCoord();
         int yCoord = walker.getYCoord();
@@ -73,7 +73,7 @@ public class WallChecker{
     }
 
 
-    private boolean checkMoveForward()
+    public boolean checkMoveForward()
     {
         int xCoord = walker.getXCoord();
         int yCoord = walker.getYCoord();

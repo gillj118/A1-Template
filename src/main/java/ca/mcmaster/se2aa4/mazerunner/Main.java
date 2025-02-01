@@ -64,21 +64,9 @@ public class Main {
             
             RightHandAlgorithm algorithm = new RightHandAlgorithm(maze.returnCopy(),entranceExitCoords,facingDirection);
 
+            String path = algorithm.pathSearch();
 
-            // RightHandAlgorithm solver = new RightHandAlgorithm();
-            // if (solver.pathSearch(maze,mazeWalk, finishCoords[0],finishCoords[1], mazeFile) == true)
-            // {
-            //     logger.info("**** Computing path");
-            //     logger.info("PATH COMPUTED");
-            //     maze.printMaze();
-            //     logger.info("** End of MazeRunner");
-            //   }
-
-            // else
-            // {
-            //     System.out.println("Maze solver has failed");
-            // }
-
+            System.out.println("Path: " + path);
             
 
         } catch(Exception e) {
