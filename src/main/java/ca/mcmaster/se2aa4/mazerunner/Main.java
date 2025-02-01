@@ -24,12 +24,20 @@ public class Main {
         
         Options options = new Options();
         options.addOption("i",true,"Input file containing maze");
+        options.addOption("i",true,"Path checker");
         
         CommandLineParser parser = new DefaultParser();
         
         try {
 
             CommandLine cmd =  parser.parse(options, args);
+
+            if (cmd.hasOption("i") == false)
+            {
+                logger.error("Remember to use -i before the file you want to use.");
+                return;
+            }
+
             String mazeFile = cmd.getOptionValue("i");
 
             logger.info("**** Reading the maze from file " + mazeFile);
@@ -61,15 +69,24 @@ public class Main {
                 sideStart = 'E';
                 facingDirection = 'W';
              }
-            
-            RightHandAlgorithm algorithm = new RightHandAlgorithm(maze.returnCopy(),entranceExitCoords,facingDirection);
 
-            String path = algorithm.pathSearch();
+             if (cmd.hasOption("p"))
+             {
+                
+             }
 
-            StringManipulator manip = new StringManipulator();
+             else
+             {
 
-            System.out.println("Path: " + path);
-            System.out.println("Factoried Path " + manip.toFactorized(path));
+                RightHandAlgorithm algorithm = new RightHandAlgorithm(maze.returnCopy(),entranceExitCoords,facingDirection);
+
+                String path = algorithm.pathSearch();
+
+                StringManipulator manip = new StringManipulator();
+
+                System.out.println("Path: " + path);
+                System.out.println("Factoried Path " + manip.toFactorized(path));
+             }
 
             
 
