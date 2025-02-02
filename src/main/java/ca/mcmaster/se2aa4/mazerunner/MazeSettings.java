@@ -2,33 +2,33 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class MazeSettings {
 
-    public int [] findStartEnd(int rows, int cols, char maze [][])
-    {
-        int randNum = (int)(Math.random()*2);
-        int []coords = findOpenings(rows,cols,maze);
+    // public int [] findStartEnd(int rows, int cols, char maze [][])
+    // {
+    //     int randNum = (int)(Math.random()*2);
+    //     int []coords = findOpenings(rows,cols,maze);
 
-        //Westside start
-        if (randNum == 0)
-        {
-           return coords;
-        }
+    //     //Westside start
+    //     if (randNum == 0)
+    //     {
+    //        return coords;
+    //     }
 
-        //Eastside start
-        else
-        {
-            int westOpeningX = coords[0];
-            int westOpeningY = coords[1];
-            coords[0] = coords[2];
-            coords[1] = coords[3];
-            coords[2] = westOpeningX;
-            coords[3] = westOpeningY;
-            return coords;
-        }
+    //     //Eastside start
+    //     else
+    //     {
+    //         int westOpeningX = coords[0];
+    //         int westOpeningY = coords[1];
+    //         coords[0] = coords[2];
+    //         coords[1] = coords[3];
+    //         coords[2] = westOpeningX;
+    //         coords[3] = westOpeningY;
+    //         return coords;
+    //     }
 
-    }
+    // }
 
 
-    private int[] findOpenings(int rows, int cols, char maze [][])
+    public int[] findOpenings(int rows, int cols, char maze [][])
     {
         
         int westOpeningX = 0;

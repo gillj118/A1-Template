@@ -24,7 +24,7 @@ public class Main {
         
         Options options = new Options();
         options.addOption("i",true,"Input file containing maze");
-        options.addOption("i",true,"Path checker");
+        options.addOption("p",true,"Path checker");
         
         CommandLineParser parser = new DefaultParser();
         
@@ -48,31 +48,36 @@ public class Main {
 
              MazeSettings settings = new MazeSettings();
              
-             int [] entranceExitCoords = settings.findStartEnd(maze.getRows(),maze.getCols(),maze.returnCopy());
+             int [] entranceExitCoords = settings.findOpenings(maze.getRows(),maze.getCols(),maze.returnCopy());
 
              System.out.println("Starting coords: (x,y) " + entranceExitCoords[0] + " " + entranceExitCoords[1]);
              System.out.println("ENding coords: (x,y) " + entranceExitCoords[2] + " " + entranceExitCoords[3]);
             
-             char facingDirection;
-             char sideStart;
-
-             //Westside start
-             if (entranceExitCoords[0] == 0)
-             {
-               sideStart = 'W';
-               facingDirection = 'E';
-             }
-
-             //Eastside start
-             else
-             {
-                sideStart = 'E';
-                facingDirection = 'W';
-             }
-
+             char facingDirection = 'E';
+             char sideStart = 'W';
+             
              if (cmd.hasOption("p"))
              {
-                
+                String path = cmd.getOptionValue("p");
+
+                if (path == null || path.isEmpty()) 
+                {
+                    logger.error("Error: No path provided with -p flag.");
+                    return;
+                }
+                System.out.println("Path received for verification: " + path);
+
+                PathVerifier pathVerifier = new PathVerifier(maze.returnCopy(),entranceExitCoords,path);
+                boolean correctPath = pathVerifier.verifyPath();
+                if (correctPath == true)
+                {
+                    System.out.println("correct input");
+                }
+                else
+                {
+                    System.out.println("incorrect input");
+                }
+
              }
 
              else
@@ -91,7 +96,7 @@ public class Main {
             
 
         } catch(Exception e) {
-            logger.error("/!\\ An error has occured /!\\");
+            logger.error("/!\\ An error has occured /!\\",e);
         }
 
     }

@@ -2,6 +2,7 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class StringManipulator{
 
+	//change up a bit
 
 	public String toFactorized(String path)
 	{

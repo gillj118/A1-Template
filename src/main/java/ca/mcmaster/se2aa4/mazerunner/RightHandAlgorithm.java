@@ -26,10 +26,7 @@ public class RightHandAlgorithm {
 
         while (!((walker.getXCoord() == endXCoord) && (walker.getYCoord() == endYCoord))) 
         {
-            // System.out.println("Hi");
-            // System.out.println(path);
-        //    System.out.println("X Coord, YCoord: " + walker.getXCoord() + ", " + walker.getYCoord());
-
+            
             if (wallChecker.checkRightHandWall() == true)
             {
                 if (wallChecker.checkMoveForward() == true) 

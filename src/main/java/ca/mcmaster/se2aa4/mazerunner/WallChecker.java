@@ -79,9 +79,9 @@ public class WallChecker{
         int yCoord = walker.getYCoord();
         char direction = walker.getDirection();
 
-        if (direction == 'N')
+        if (direction == 'N' && yCoord > 0 )
         {
-            if (maze[yCoord-1][xCoord] == ' ')
+            if (maze[yCoord-1][xCoord] == ' ' ) 
             {
                 return true;
             }
@@ -92,7 +92,7 @@ public class WallChecker{
             }
         }
 
-        else if (direction == 'S')
+        else if (direction == 'S' && yCoord < maze.length - 1)
         {
             if (maze[yCoord+1][xCoord] == ' ')
             {
@@ -105,7 +105,7 @@ public class WallChecker{
             }
         }
 
-        else if (direction == 'E')
+        else if (direction == 'E' && xCoord < maze[0].length - 1)
         {
             if (maze[yCoord][xCoord+1] == ' ')
             {
@@ -117,7 +117,7 @@ public class WallChecker{
                 return false;
             }
         }
-        else
+        else if (direction == 'W' && xCoord > 0)
         {
             if (maze[yCoord][xCoord-1] == ' ')
             {
@@ -129,6 +129,8 @@ public class WallChecker{
                 return false;
             }
         }
+
+        return false;
 
     }
 
