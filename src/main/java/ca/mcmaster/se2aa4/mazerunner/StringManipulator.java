@@ -2,48 +2,105 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class StringManipulator{
 
-	//change up a bit
-
-	public String toFactorized(String path)
+	public String cannonicalToFactorized(String path)
 	{
-        int count = 1;
-        char prev = path.charAt(0);
-
+        int num = 1;
+        path = path.trim();
+        char previous = path.charAt(0);
         String newPath = "";
 
+        //loop through path starting at second character
         for (int i = 1; i < path.length(); i++) 
         {
-            char current = path.charAt(i);
-            if (current == prev) 
+            char currentDirection = path.charAt(i);
+            
+            //increment if multiple same directions in a row
+            if (currentDirection == previous) 
             {
-                count++;
+                num++;
             } 
+            //when direction changes
             else 
             {
-                if (count > 1) 
+                if (num > 1) 
                 {
-                	newPath = newPath + count + prev + " ";
+                	newPath = newPath + num + previous + " ";
                 } 
                 else 
                 {
-                	newPath = newPath + prev + " ";
+                	newPath = newPath + previous + " ";
                 }
-                prev = current;
-                count = 1;
+                previous = currentDirection;
+                num = 1;
             }
         }
-
-        if (count > 1) 
+        //handle laste sequence of directions
+        if (num > 1) 
         {
-        	newPath = newPath + count + prev + " ";
+        	newPath = newPath + num + previous + " ";
         } 
         else 
         {
-        	newPath = newPath + prev + " ";
+        	newPath = newPath + previous + " ";
         }
-
-     
-
-        return newPath;
+        return newPath.trim();
 	}
+
+    public String factorizedToCanonical(String factoredPath) {
+
+        StringBuilder canonicalPath = new StringBuilder();
+        int length = factoredPath.length();
+        
+        for (int i = 0; i < length; i++) 
+        {
+            char currentChar = factoredPath.charAt(i);
+
+            //check if the character is a digit
+            if (Character.isDigit(currentChar)) 
+            {   
+                //convert the character to an integer
+                int count = Character.getNumericValue(currentChar);
+
+                //get next character which should be a direction
+                if (i + 1 < length) 
+                {
+                    char direction = factoredPath.charAt(i + 1);
+
+                    for (int j = 0; j < count; j++) 
+                    {
+                        canonicalPath.append(direction);
+                    }
+                    canonicalPath.append(' ');
+                    //skip direction character
+                    i++;
+                }
+            }    
+            else 
+            {
+                canonicalPath.append(currentChar);
+                canonicalPath.append(' ');
+            }
+        }
+        return canonicalPath.toString().trim();
+    }
+
+    public boolean checkFacotrized(String path)
+    {
+        for (int i = 0; i < path.length(); i++) 
+        {
+            char currentChar = path.charAt(i);
+
+            // if digit followed by direction character
+            if (Character.isDigit(currentChar)) 
+            {
+                //factored form
+                if (i + 1 < path.length() && (path.charAt(i + 1) == 'F' || path.charAt(i + 1) == 'R' || path.charAt(i + 1) == 'L'))
+                {
+                    return true; 
+                }
+            }
+        }
+        //cannonical form
+        return false; 
+    }
 }

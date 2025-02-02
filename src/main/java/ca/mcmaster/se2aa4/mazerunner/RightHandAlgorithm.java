@@ -57,7 +57,4 @@ public class RightHandAlgorithm {
         }
         return path;
     }
-
-
-
 }

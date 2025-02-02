@@ -12,7 +12,8 @@ public class WallChecker{
 		this.walker = walker;
 	}
 
-	public boolean checkRightHandWall()
+	//checks if there is a wall on the right hand based on coordinates
+    public boolean checkRightHandWall()
     {
         int xCoord = walker.getXCoord();
         int yCoord = walker.getYCoord();
@@ -72,7 +73,7 @@ public class WallChecker{
 
     }
 
-
+    //check if there is a wall infront before moving forward
     public boolean checkMoveForward()
     {
         int xCoord = walker.getXCoord();
@@ -123,18 +124,12 @@ public class WallChecker{
             {
                 return true;
             }
-
+            
             else
             {
                 return false;
             }
         }
-
         return false;
-
     }
-
-
-
-
 }
