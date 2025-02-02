@@ -82,7 +82,7 @@ public class PathVerifier{
 		}
 
 		//check end coords
-		if ((walker.getXCoord() == endXCoord) && (walker.getYCoord() == endYCoord))
+		if ((walker.getXCoord() == endXCoord) && (walker.getYCoord() == endYCoord) && (counter==path.length()))
 		{
 			return true;
 		}

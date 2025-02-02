@@ -94,8 +94,8 @@ public class Main {
                 String path = algorithm.pathSearch();
 
                 StringManipulator manip = new StringManipulator();
-                System.out.println("Path: " + path);
-                System.out.println("Factoried Path " + manip.cannonicalToFactorized(path));
+                System.out.println("Cannonical Path: " + manip.spacedCannonical(path));
+                System.out.println("Factoried Path: " + manip.cannonicalToFactorized(path));
              }
 
         } catch(Exception e) {

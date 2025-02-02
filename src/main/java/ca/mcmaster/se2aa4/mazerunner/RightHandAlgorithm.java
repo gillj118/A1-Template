@@ -11,8 +11,6 @@ public class RightHandAlgorithm {
 
     public RightHandAlgorithm(char [][] maze, int []coords, char facingDirection)
     {
-        System.out.println("Start: (" + coords[0] + ", " + coords[1] + ")");
-        System.out.println("End: (" + coords[2] + ", " + coords[3] + ")");
         this.maze = maze;
         this.endXCoord = coords[2];
         this.endYCoord = coords[3];
@@ -24,9 +22,10 @@ public class RightHandAlgorithm {
     {
         String path ="";
 
+        //goes until final coords are reached
         while (!((walker.getXCoord() == endXCoord) && (walker.getYCoord() == endYCoord))) 
         {
-            
+             //wall on right side
             if (wallChecker.checkRightHandWall() == true)
             {
                 if (wallChecker.checkMoveForward() == true) 
@@ -41,7 +40,7 @@ public class RightHandAlgorithm {
                     path = path + "L";
                 }
             }
-
+            //if there is no wall on right side
             else
             {
                 walker.turnRight();
@@ -52,8 +51,8 @@ public class RightHandAlgorithm {
                     walker.moveForward();
                     path = path + "F";
                 }
-
             }
+
         }
         return path;
     }

@@ -12,7 +12,6 @@ public class MazeWalk
 		this.xCoord = startX;
 		this.yCoord = startY;
 		this.direction = direction;
-
 	}
 
 	public void turnRight()
@@ -36,7 +35,6 @@ public class MazeWalk
 		{
 			this.direction = 'N';
 		}
-
 	}
 
 	public void turnLeft()
@@ -60,7 +58,6 @@ public class MazeWalk
 		{
 			this.direction = 'N';
 		}
-
 	}
 
 	public void moveForward()
@@ -79,7 +76,6 @@ public class MazeWalk
 		{
 			this.xCoord -= 1;
 		}
-
 
 		else
 		{
@@ -101,5 +97,4 @@ public class MazeWalk
 	{
 		return this.direction;
 	}
-
 }

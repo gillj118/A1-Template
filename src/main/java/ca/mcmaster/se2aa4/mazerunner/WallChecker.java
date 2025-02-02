@@ -58,7 +58,7 @@ public class WallChecker{
             }
         }
 
-        else
+        else if (direction == 'W')
         {
             if (maze[yCoord-1][xCoord] == '#')
             {
@@ -70,6 +70,8 @@ public class WallChecker{
                 return false;
             }
         }
+
+        return false;
 
     }
 
@@ -124,7 +126,7 @@ public class WallChecker{
             {
                 return true;
             }
-            
+
             else
             {
                 return false;

@@ -53,13 +53,13 @@ public class StringManipulator{
         
         for (int i = 0; i < length; i++) 
         {
-            char currentChar = factoredPath.charAt(i);
+            char character = factoredPath.charAt(i);
 
             //check if the character is a digit
-            if (Character.isDigit(currentChar)) 
+            if (Character.isDigit(character)) 
             {   
                 //convert the character to an integer
-                int count = Character.getNumericValue(currentChar);
+                int count = Character.getNumericValue(character);
 
                 //get next character which should be a direction
                 if (i + 1 < length) 
@@ -70,28 +70,45 @@ public class StringManipulator{
                     {
                         canonicalPath.append(direction);
                     }
-                    canonicalPath.append(' ');
+
                     //skip direction character
                     i++;
                 }
             }    
             else 
             {
-                canonicalPath.append(currentChar);
-                canonicalPath.append(' ');
+                canonicalPath.append(character);
             }
         }
         return canonicalPath.toString().trim();
+    }
+
+    public String spacedCannonical(String path)
+    {
+        String spacedPath = "";
+
+        for (int i = 0; i<path.length(); i++)
+        {
+            char direction = path.charAt(i);
+            spacedPath += Character.toString(direction);
+
+            //checks if current direction and next direction are different
+            if ((i+1 < path.length() - 1) && (!(path.charAt(i + 1) == direction)))
+            {
+                spacedPath += " ";
+            }
+        }
+        return spacedPath;
     }
 
     public boolean checkFacotrized(String path)
     {
         for (int i = 0; i < path.length(); i++) 
         {
-            char currentChar = path.charAt(i);
+            char character = path.charAt(i);
 
             // if digit followed by direction character
-            if (Character.isDigit(currentChar)) 
+            if (Character.isDigit(character)) 
             {
                 //factored form
                 if (i + 1 < path.length() && (path.charAt(i + 1) == 'F' || path.charAt(i + 1) == 'R' || path.charAt(i + 1) == 'L'))
