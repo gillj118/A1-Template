@@ -48,7 +48,7 @@ public class Main {
             //creates maze
             MazeReader mazeRead = new MazeReader(mazeFile);
             Maze maze = mazeRead.readMaze();
-            maze.printMaze();
+           // maze.printMaze();
 
              //finds openings
              MazeSettings settings = new MazeSettings();

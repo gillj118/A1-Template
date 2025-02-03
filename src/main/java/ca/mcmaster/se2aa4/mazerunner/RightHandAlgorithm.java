@@ -1,7 +1,7 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
 
-public class RightHandAlgorithm {
+public class RightHandAlgorithm implements MazeAlgorithmSolver{
     
     private char [][] maze;
     private int endXCoord;
