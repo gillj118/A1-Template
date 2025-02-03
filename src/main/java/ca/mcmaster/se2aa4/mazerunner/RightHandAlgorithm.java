@@ -52,7 +52,6 @@ public class RightHandAlgorithm implements MazeAlgorithmSolver{
                     path = path + "F";
                 }
             }
-
         }
         return path;
     }
