@@ -1,7 +1,7 @@
 # Assignment A1 - Maze Runner
 
-- Original author: Dr. [Sébastien Mosser](https://mosser.github.io)
-- Version: 2024.01
+- Author: Jodh Gill 
+- Version: 2025.02
 - Context: McMaster University > Engineering > Computing & Software > SFWRENG > 2AA4
 - License: [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
