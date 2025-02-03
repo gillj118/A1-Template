@@ -2,8 +2,8 @@ package ca.mcmaster.se2aa4.mazerunner;
 
 public class StringManipulator{
 
-	public String cannonicalToFactorized(String path)
-	{
+    public String cannonicalToFactorized(String path)
+    {
         int num = 1;
         path = path.trim();
         char previous = path.charAt(0);
@@ -24,11 +24,11 @@ public class StringManipulator{
             {
                 if (num > 1) 
                 {
-                	newPath = newPath + num + previous + " ";
+                    newPath = newPath + num + previous + " ";
                 } 
                 else 
                 {
-                	newPath = newPath + previous + " ";
+                    newPath = newPath + previous + " ";
                 }
                 previous = currentDirection;
                 num = 1;
@@ -37,14 +37,14 @@ public class StringManipulator{
         //handle laste sequence of directions
         if (num > 1) 
         {
-        	newPath = newPath + num + previous + " ";
+            newPath = newPath + num + previous + " ";
         } 
         else 
         {
-        	newPath = newPath + previous + " ";
+            newPath = newPath + previous + " ";
         }
         return newPath.trim();
-	}
+    }
 
     public String factorizedToCanonical(String factoredPath) {
 
