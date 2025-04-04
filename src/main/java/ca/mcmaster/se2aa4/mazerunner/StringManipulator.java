@@ -46,42 +46,48 @@ public class StringManipulator{
         return newPath.trim();
     }
 
-    public String factorizedToCanonical(String factoredPath) {
-
+   public String factorizedToCanonical(String factoredPath) 
+   {
         StringBuilder canonicalPath = new StringBuilder();
         int length = factoredPath.length();
-        
-        for (int i = 0; i < length; i++) 
+        int i = 0;
+    
+        while (i < length) 
         {
             char character = factoredPath.charAt(i);
 
             //check if the character is a digit
             if (Character.isDigit(character)) 
-            {   
-                //convert the character to an integer
-                int count = Character.getNumericValue(character);
-
-                //get next character which should be a direction
-                if (i + 1 < length) 
+            {
+                int count = 0;
+                //get all consecutive digit characters.
+                while (i < length && Character.isDigit(factoredPath.charAt(i))) 
                 {
-                    char direction = factoredPath.charAt(i + 1);
-
+                    count = count * 10 + Character.getNumericValue(factoredPath.charAt(i));
+                    i++;
+                }
+                //after loop  next character should be the symbol to repeat.
+                if (i < length) 
+                {
+                    char direction = factoredPath.charAt(i);
                     for (int j = 0; j < count; j++) 
                     {
                         canonicalPath.append(direction);
                     }
-
-                    //skip direction character
-                    i++;
                 }
-            }    
+                i++; 
+            } 
             else 
             {
+                // If it's not a digit, simply append the character.
                 canonicalPath.append(character);
+                i++;
             }
         }
+        
         return canonicalPath.toString().trim();
     }
+
 
     public String spacedCannonical(String path)
     {

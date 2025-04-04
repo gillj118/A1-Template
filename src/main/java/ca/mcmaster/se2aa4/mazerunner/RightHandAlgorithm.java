@@ -1,58 +1,65 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+public class RightHandAlgorithm implements MazeAlgorithmSolver {
 
-public class RightHandAlgorithm implements MazeAlgorithmSolver{
-    
-    private char [][] maze;
+    private char[][] maze;
     private int endXCoord;
     private int endYCoord;
     private MazeWalk walker;
     private WallChecker wallChecker;
-
-    public RightHandAlgorithm(char [][] maze, int []coords, char facingDirection)
+    private MazeCommandInvoker invoker; 
+    private MacroCommand macro;         
+    
+    public RightHandAlgorithm(char[][] maze, int[] coords, char facingDirection) 
     {
         this.maze = maze;
         this.endXCoord = coords[2];
         this.endYCoord = coords[3];
-        this.walker = new MazeWalk (coords[0],  coords[1], facingDirection);
+        this.walker = new MazeWalk(coords[0], coords[1], facingDirection);
         this.wallChecker = new WallChecker(walker, maze);
+        this.invoker = new MazeCommandInvoker();
+        this.macro = new MacroCommand();
     }
-   
-    public String pathSearch()
+
+    @Override
+    public String pathSearch() 
     {
-        String path ="";
-
         //goes until final coords are reached
-        while (!((walker.getXCoord() == endXCoord) && (walker.getYCoord() == endYCoord))) 
+        while (!(walker.getXCoord() == endXCoord && walker.getYCoord() == endYCoord)) 
         {
-             //wall on right side
-            if (wallChecker.checkRightHandWall() == true)
+            //wall on right side
+            if (wallChecker.checkRightHandWall()) 
             {
-                if (wallChecker.checkMoveForward() == true) 
+                if (wallChecker.checkMoveForward()) 
                 {
-                    walker.moveForward();
-                    path = path + "F";
-                }
-
-                else
+                    MazeCommand moveFwd = new MoveForwardCommand(walker);
+                    invoker.executeCommand(moveFwd);
+                    macro.addCommand(moveFwd);
+                } 
+                else 
                 {
-                    walker.turnLeft();
-                    path = path + "L";
+                    MazeCommand turnLeft = new TurnLeftCommand(walker);
+                    invoker.executeCommand(turnLeft);
+                    macro.addCommand(turnLeft);
                 }
-            }
+            } 
             //if there is no wall on right side
-            else
+            else 
             {
-                walker.turnRight();
-                path = path + "R";
-
-                if(wallChecker.checkMoveForward() == true)
+                MazeCommand turnRight = new TurnRightCommand(walker);
+                invoker.executeCommand(turnRight);
+                macro.addCommand(turnRight);
+                
+                if (wallChecker.checkMoveForward()) 
                 {
-                    walker.moveForward();
-                    path = path + "F";
+                    MazeCommand moveFwd = new MoveForwardCommand(walker);
+                    invoker.executeCommand(moveFwd);
+                    macro.addCommand(moveFwd);
                 }
             }
         }
-        return path;
+        //return the canonical representation of path
+        return macro.getCanonicalPath();
     }
 }
+

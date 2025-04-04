@@ -80,9 +80,9 @@ public class MazeTest{
 	@Test
 	public void testBigFactorizedToCanonical()
 	{
-		String factoriazed = "9F 9L 9R";
+		String factoriazed = "10F10L10R";
 		String cannonical = stringManip.factorizedToCanonical(factoriazed);
-		assertEquals(cannonical, "FFFFFFFFF LLLLLLLLL RRRRRRRRR");
+		assertEquals(cannonical, "FFFFFFFFFFLLLLLLLLLLRRRRRRRRRR");
 	}
 
 	@Test
