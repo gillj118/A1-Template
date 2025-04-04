@@ -56,8 +56,9 @@ public class Main {
              logger.info("Starting coords: (x,y) " + entranceExitCoords[0] + " " + entranceExitCoords[1]);
              logger.info("ENding coords: (x,y) " + entranceExitCoords[2] + " " + entranceExitCoords[3]);
             
-             char facingDirection = 'E';
-             char sideStart = 'W';
+            // char facingDirection = 'E';
+
+            MazeLoggerObserver loggerObserver = new MazeLoggerObserver();
              
              //user provides path
              if (cmd.hasOption("p"))
@@ -74,6 +75,7 @@ public class Main {
 
                 //checks if correct path
                 PathVerifier pathVerifier = new PathVerifier(maze.returnCopy(),entranceExitCoords,path);
+                pathVerifier.addObserver(loggerObserver);
                 boolean correctPath = pathVerifier.verifyPath();
                 
                 if (correctPath == true)
@@ -90,7 +92,8 @@ public class Main {
              else
              {
                 //solves map
-                RightHandAlgorithm algorithm = new RightHandAlgorithm(maze.returnCopy(),entranceExitCoords,facingDirection);
+                RightHandAlgorithm algorithm = new RightHandAlgorithm(maze.returnCopy(),entranceExitCoords,'E');
+                algorithm.addObserver(loggerObserver);
                 String path = algorithm.pathSearch();
 
                 StringManipulator manip = new StringManipulator();

@@ -1,5 +1,8 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RightHandAlgorithm implements MazeAlgorithmSolver {
 
     private char[][] maze;
@@ -9,7 +12,26 @@ public class RightHandAlgorithm implements MazeAlgorithmSolver {
     private WallChecker wallChecker;
     private MazeCommandInvoker invoker; 
     private MacroCommand macro;         
-    
+    private List<MazeObserver> observers = new ArrayList<>();
+
+    public void addObserver(MazeObserver observer) 
+    {
+         observers.add(observer);
+    }
+
+    public void removeObserver(MazeObserver observer) 
+    {
+         observers.remove(observer);
+    }
+
+    private void notifyObservers(String event) 
+    {
+         for(MazeObserver obs : observers) 
+         {
+              obs.update(event, walker);
+         }
+    }
+
     public RightHandAlgorithm(char[][] maze, int[] coords, char facingDirection) 
     {
         this.maze = maze;
@@ -35,12 +57,14 @@ public class RightHandAlgorithm implements MazeAlgorithmSolver {
                     MazeCommand moveFwd = new MoveForwardCommand(walker);
                     invoker.executeCommand(moveFwd);
                     macro.addCommand(moveFwd);
+                    notifyObservers("Moved Forward via Right-Hand Rule");
                 } 
                 else 
                 {
                     MazeCommand turnLeft = new TurnLeftCommand(walker);
                     invoker.executeCommand(turnLeft);
                     macro.addCommand(turnLeft);
+                    notifyObservers("Turned Left via Right-Hand Rule");
                 }
             } 
             //if there is no wall on right side
@@ -49,15 +73,18 @@ public class RightHandAlgorithm implements MazeAlgorithmSolver {
                 MazeCommand turnRight = new TurnRightCommand(walker);
                 invoker.executeCommand(turnRight);
                 macro.addCommand(turnRight);
+                notifyObservers("Turned Right via Right-Hand Rule");
                 
                 if (wallChecker.checkMoveForward()) 
                 {
                     MazeCommand moveFwd = new MoveForwardCommand(walker);
                     invoker.executeCommand(moveFwd);
                     macro.addCommand(moveFwd);
+                    notifyObservers("Moved Forward after Turning Right");
                 }
             }
         }
+        notifyObservers("Reached Maze Exit");
         //return the canonical representation of path
         return macro.getCanonicalPath();
     }

@@ -1,10 +1,32 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PathVerifier {
 
     private char[][] maze;
     private int[] openingCoords;
     private String path;
+    private List<MazeObserver> observers = new ArrayList<>();
+
+    public void addObserver(MazeObserver observer) 
+    {
+         observers.add(observer);
+    }
+    
+    public void removeObserver(MazeObserver observer) 
+    {
+         observers.remove(observer);
+    }
+    
+    private void notifyObservers(String event) 
+    {
+         for(MazeObserver obs : observers) 
+         {
+              obs.update(event, null);
+         }
+    }
 
     public PathVerifier(char[][] maze, int[] openingCoords, String path) {
         this.maze = maze;
@@ -24,7 +46,9 @@ public class PathVerifier {
         MazeWalk walkerEast = new MazeWalk(openingCoords[2], openingCoords[3], 'W');
         
         //checks if path correxponds to starting at west side or east side
-        return pathChecker(walkerWest, openingCoords[2], openingCoords[3]) || pathChecker(walkerEast, openingCoords[0], openingCoords[1]);
+        boolean correct = pathChecker(walkerWest, openingCoords[2], openingCoords[3]) || pathChecker(walkerEast, openingCoords[0], openingCoords[1]);
+        notifyObservers("Path verification result: " + correct);
+        return correct;
     }
 
     private boolean pathChecker(MazeWalk walker, int endXCoord, int endYCoord) 
@@ -36,7 +60,8 @@ public class PathVerifier {
         {
             char c = path.charAt(i);
             MazeCommand command;
-            if (c == 'F') {
+            if (c == 'F') 
+            {
                 if (!wallChecker.checkMoveForward()) 
                 {
                     return false;
@@ -47,7 +72,8 @@ public class PathVerifier {
             {
                 command = new TurnRightCommand(walker);
             } 
-            else if (c == 'L') {
+            else if (c == 'L') 
+            {
                 command = new TurnLeftCommand(walker);
             } 
             else 

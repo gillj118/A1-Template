@@ -1,100 +1,110 @@
 package ca.mcmaster.se2aa4.mazerunner;
 
+import java.util.ArrayList;
+import java.util.List;
 
-public class MazeWalk
-{
-	private int xCoord;
-	private int yCoord;
-	private char direction;
+public class MazeWalk {
+    private int xCoord;
+    private int yCoord;
+    private char direction;
+    private List<MazeObserver> observers = new ArrayList<>();
 
-	public MazeWalk(int startX, int startY, char direction)
-	{
-		this.xCoord = startX;
-		this.yCoord = startY;
-		this.direction = direction;
-	}
+    public MazeWalk(int startX, int startY, char direction) 
+    {
+        this.xCoord = startX;
+        this.yCoord = startY;
+        this.direction = direction;
+    }
 
-	public void turnRight()
-	{
-		if (direction == 'N')
-		{
-			this.direction = 'E';
-		}
+    public void addObserver(MazeObserver observer) 
+    {
+         observers.add(observer);
+    }
+    
+    public void removeObserver(MazeObserver observer) 
+    {
+         observers.remove(observer);
+    }
+    
+    private void notifyObservers(String event) 
+    {
+         for(MazeObserver obs : observers) {
+             obs.update(event, this);
+         }
+    }
+    
+    public void turnRight() 
+    {
+        if (direction == 'N') 
+        {
+            direction = 'E';
+        } 
+        else if (direction == 'E')
+        {
+            direction = 'S';
+        } 
+        else if (direction == 'S') 
+        {
+            direction = 'W';
+        } 
+        else 
+        {
+            direction = 'N';
+        }
+        notifyObservers("Turned Right");
+    }
 
-		else if (direction == 'E')
-		{
-			this.direction = 'S';
-		}
+    public void turnLeft() 
+    {
+        if (direction == 'N') 
+        {
+            direction = 'W';
+        } 
+        else if (direction == 'W') 
+        {
+            direction = 'S';
+        } 
+        else if (direction == 'S') 
+        {
+            direction = 'E';
+        } 
+        else 
+        {
+            direction = 'N';
+        }
+        notifyObservers("Turned Left");
+    }
 
-		else if (direction == 'S')
-		{
-			this.direction = 'W';
-		}
+    public void moveForward() 
+    {
+        if (direction == 'N') 
+        {
+            yCoord -= 1;
+        } 
+        else if (direction == 'S') 
+        {
+            yCoord += 1;
+        } 
+        else if (direction == 'W') 
+        {
+            xCoord -= 1;
+        } 
+        else 
+        {
+            xCoord += 1;
+        }
+        notifyObservers("Moved Forward");
+    }
 
-		else
-		{
-			this.direction = 'N';
-		}
-	}
+    public int getXCoord() {
+        return xCoord;
+    }
 
-	public void turnLeft()
-	{
-		if (direction == 'N')
-		{
-			this.direction = 'W';
-		}
+    public int getYCoord() {
+        return yCoord;
+    }
 
-		else if (direction == 'W')
-		{
-			this.direction = 'S';
-		}
-
-		else if (direction == 'S')
-		{
-			this.direction = 'E';
-		}
-
-		else
-		{
-			this.direction = 'N';
-		}
-	}
-
-	public void moveForward()
-	{
-		if (direction == 'N')
-		{
-			this.yCoord -= 1;
-		}
-
-		else if (direction == 'S')
-		{
-			this.yCoord += 1;
-		}
-
-		else if (direction == 'W')
-		{
-			this.xCoord -= 1;
-		}
-
-		else
-		{
-			this.xCoord +=1;
-		}
-	}
-
-	public int getXCoord()
-	{
-		return this.xCoord;
-	}
-
-	public int getYCoord()
-	{
-		return this.yCoord;
-	}
-
-	public char getDirection()
-	{
-		return this.direction;
-	}
+    public char getDirection() {
+        return direction;
+    }
 }
